@@ -19,6 +19,14 @@ while True:
             pygame.quit()
             exit()
 
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_a] or keys[pygame.K_LEFT]:
+        player.move_left()
+    if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
+        player.move_right()
+    if keys[pygame.K_w] or keys[pygame.K_UP]:
+        player.perform_jump()
+
     screen.blit(bg,(0,0))
     player.update()
 
