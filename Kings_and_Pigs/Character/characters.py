@@ -4,6 +4,7 @@ from settings import HEIGHT, WIDTH
 # Kings
 
 class HumanKing(pygame.sprite.Sprite):
+    JUMP_HEIGHT = 50
     
     def __init__(self,screen,pos):
         super().__init__()
@@ -19,6 +20,8 @@ class HumanKing(pygame.sprite.Sprite):
         self.rect = self.img.get_rect()
         self.rect.midbottom = pos
         self.vel = 0
+        self.jump_vel = 0
+        self.jump_des = 0
 
     def move_right(self):
         self.rect.centerx += 5
@@ -33,8 +36,8 @@ class HumanKing(pygame.sprite.Sprite):
         self.rect.centery += 5
 
     def perform_jump(self):
-        pass
-
+        self.rect.centery -= self.JUMP_HEIGHT
+        
     def perform_attack(self):
         pass
 
@@ -72,6 +75,10 @@ class HumanKing(pygame.sprite.Sprite):
         self.state = self.states[state]
         self.current_animation = self.animations[self.state]
         self.animation_index = 0
+        pos = self.rect.midbottom
+        self.img = self.current_animation[self.animation_index]
+        self.rect = self.img.get_rect()
+        self.rect.midbottom = pos
         self.display()
 
     def update(self):
@@ -116,10 +123,10 @@ class HumanKing(pygame.sprite.Sprite):
                     self.animations["hit"].append(surface)
             elif animation == "jump":
                 surface = pygame.image.load("Assets/King_Human/Jump/0.png").convert_alpha()
-                self.animations["jump"] = surface
+                self.animations["jump"].append(surface)
             elif animation == "fall":
                 surface = pygame.image.load("Assets/King_Human/Jump/1.png").convert_alpha()
-                self.animations["fall"] = surface
+                self.animations["fall"].append(surface)
             elif animation == "land":
                 surface = pygame.image.load("Assets/King_Human/Jump/2.png").convert_alpha()
                 self.animations["land"] = surface

@@ -10,7 +10,7 @@ clock = pygame.time.Clock()
 
 player = HumanKing(screen,(100, 200))
 bg = pygame.Surface((WIDTH,HEIGHT))
-bg.fill("white")
+bg.fill("yellow")
 
 while True:
     clock.tick(60)
@@ -26,6 +26,21 @@ while True:
                 player.change_state(2)
             if event.key == pygame.K_w or event.key == pygame.K_SPACE or event.key == pygame.K_UP:
                 player.perform_jump()
+            if event.key == pygame.K_u:
+                # Attack
+                player.change_state(7)
+            if event.key == pygame.K_i:
+                # Dead
+                player.change_state(11)
+            if event.key == pygame.K_o:
+                # Enter
+                player.change_state(8)
+            if event.key == pygame.K_p:
+                # Exit
+                player.change_state(9)
+            if event.key == pygame.K_j:
+                # Hit
+                player.change_state(10)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a or event.key == pygame.K_LEFT:
